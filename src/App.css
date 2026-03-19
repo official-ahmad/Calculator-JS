@@ -1,0 +1,285 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+@import "tailwindcss";
+
+:root {
+	color-scheme: dark;
+	--bg-1: #0a1b33;
+	--bg-2: #132646;
+	--ink: #f5f9ff;
+	--muted: #abc1df;
+	--panel: rgba(10, 17, 32, 0.68);
+	--line: rgba(255, 255, 255, 0.12);
+	--screen-a: rgba(17, 33, 60, 0.98);
+	--screen-b: rgba(8, 14, 27, 0.9);
+	--key: #162540;
+	--key-hover: #22345a;
+	--action: #4f78a6;
+	--operator: #f4a340;
+	--operator-hover: #f8b668;
+	--equal: #1e8f74;
+	--equal-hover: #27a489;
+	--focus-ring: #93c7ff;
+}
+
+:root[data-theme="light"] {
+	color-scheme: light;
+	--bg-1: #dbe9fa;
+	--bg-2: #f5f9ff;
+	--ink: #1c2a3a;
+	--muted: #5b7290;
+	--panel: rgba(255, 255, 255, 0.75);
+	--line: rgba(14, 34, 60, 0.12);
+	--screen-a: rgba(232, 241, 255, 0.98);
+	--screen-b: rgba(214, 229, 248, 0.95);
+	--key: #d4e2f2;
+	--key-hover: #c5d8ee;
+	--action: #91b2d8;
+	--operator: #f4bd71;
+	--operator-hover: #f2cf99;
+	--equal: #4bb39b;
+	--equal-hover: #67c6ae;
+	--focus-ring: #2e6baa;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: "Manrope", "Segoe UI", sans-serif;
+	color: var(--ink);
+	transition: background 0.35s ease, color 0.25s ease;
+	background:
+		radial-gradient(circle at 18% 12%, #2d4e83 0%, transparent 36%),
+		radial-gradient(circle at 82% 16%, #6f3042 0%, transparent 34%),
+		radial-gradient(circle at 50% 92%, #1f5b58 0%, transparent 38%),
+		linear-gradient(140deg, var(--bg-1), var(--bg-2));
+}
+
+#root {
+	min-height: 100vh;
+}
+
+.app-shell {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 2rem 1rem;
+}
+
+.calculator {
+	width: min(100%, 520px);
+	border-radius: 1.85rem;
+	padding: 1.15rem;
+	background: var(--panel);
+	border: 1px solid var(--line);
+	color: var(--ink);
+	box-shadow:
+		0 22px 50px rgba(2, 9, 20, 0.45),
+		inset 0 1px 0 rgba(255, 255, 255, 0.12);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.calculator__theme-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.7rem;
+	margin-bottom: 0.9rem;
+}
+
+.calculator__mode-label {
+	margin: 0;
+	font-size: 0.9rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--muted);
+}
+
+.calculator__screen {
+	border-radius: 1.4rem;
+	padding: 1rem;
+	min-height: 7rem;
+	background: linear-gradient(140deg, var(--screen-a), var(--screen-b));
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	margin-bottom: 0.95rem;
+}
+
+.calculator__equation {
+	margin: 0;
+	font-size: 0.86rem;
+	color: var(--muted);
+	min-height: 1.1rem;
+	letter-spacing: 0.02em;
+}
+
+.calculator__value {
+	margin: 0;
+	font-family: "Space Grotesk", "Segoe UI", sans-serif;
+	font-size: clamp(2rem, 5vw, 2.45rem);
+	font-weight: 700;
+	text-align: right;
+	line-height: 1.1;
+	word-break: break-all;
+}
+
+.calculator__keys {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.58rem;
+}
+
+.key {
+	border: 0;
+	border-radius: 1rem;
+	min-height: 3rem;
+	color: var(--ink);
+	background: linear-gradient(165deg, rgba(35, 56, 89, 0.95), var(--key));
+	font-family: "Space Grotesk", "Segoe UI", sans-serif;
+	font-size: 1.05rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.12s ease, filter 0.18s ease, background-color 0.2s ease;
+}
+
+.key:hover {
+	background: linear-gradient(165deg, #2e4671, var(--key-hover));
+}
+
+.key:active {
+	transform: translateY(1px) scale(0.98);
+}
+
+.key:focus-visible {
+	outline: 2px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
+.key--action {
+	background: linear-gradient(165deg, #628bb9, var(--action));
+}
+
+.key--operator {
+	background: linear-gradient(165deg, #f5b560, var(--operator));
+	color: #1f2024;
+}
+
+:root[data-theme="light"] .key {
+	color: #1e2b3a;
+}
+
+.key--operator:hover {
+	background: linear-gradient(165deg, #ffd08d, var(--operator-hover));
+}
+
+.key--equals {
+	background: linear-gradient(165deg, #29b191, var(--equal));
+	font-size: 1.15rem;
+}
+
+.key--equals:hover {
+	background: linear-gradient(165deg, #4fc6aa, var(--equal-hover));
+}
+
+.key--wide {
+	grid-column: span 2;
+}
+
+.calculator__hint {
+	margin: 0.9rem 0 0;
+	text-align: center;
+	font-size: 0.73rem;
+	letter-spacing: 0.02em;
+	color: #c4d7ee;
+}
+
+.calculator__social {
+	margin-top: 0.75rem;
+	padding-top: 0.7rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.6rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	flex-wrap: wrap;
+}
+
+.social-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.42rem;
+	padding: 0.42rem 0.68rem;
+	border-radius: 999px;
+	text-decoration: none;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--ink);
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	transition: background-color 0.2s ease, transform 0.12s ease, border-color 0.2s ease;
+}
+
+.social-link:hover {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.social-link:active {
+	transform: translateY(1px);
+}
+
+.social-link:focus-visible {
+	outline: 2px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
+.social-link svg {
+	width: 1rem;
+	height: 1rem;
+	fill: currentColor;
+	flex: 0 0 auto;
+}
+
+:root[data-theme="light"] .calculator__social {
+	border-top-color: rgba(16, 42, 68, 0.14);
+}
+
+:root[data-theme="light"] .social-link {
+	background: rgba(21, 54, 87, 0.08);
+	border-color: rgba(20, 50, 79, 0.16);
+}
+
+:root[data-theme="light"] .social-link:hover {
+	background: rgba(21, 54, 87, 0.14);
+	border-color: rgba(20, 50, 79, 0.25);
+}
+
+@media (max-width: 480px) {
+	.calculator {
+		width: min(100%, 380px);
+		padding: 0.95rem;
+		border-radius: 1.4rem;
+	}
+
+	.calculator__keys {
+		gap: 0.52rem;
+	}
+
+	.key {
+		min-height: 2.85rem;
+		border-radius: 0.9rem;
+	}
+
+	.social-link {
+		font-size: 0.75rem;
+		padding: 0.38rem 0.62rem;
+	}
+}
