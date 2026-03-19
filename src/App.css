@@ -179,6 +179,19 @@ body {
 	background: linear-gradient(165deg, #ffd08d, var(--operator-hover));
 }
 
+.key--selected {
+	box-shadow:
+		0 0 0 2px rgba(147, 199, 255, 0.65),
+		0 10px 18px rgba(17, 26, 44, 0.28);
+	transform: translateY(-1px);
+}
+
+:root[data-theme="light"] .key--selected {
+	box-shadow:
+		0 0 0 2px rgba(46, 107, 170, 0.45),
+		0 10px 18px rgba(17, 26, 44, 0.16);
+}
+
 .key--equals {
 	background: linear-gradient(165deg, #29b191, var(--equal));
 	font-size: 1.15rem;

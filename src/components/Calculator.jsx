@@ -242,6 +242,8 @@ function Calculator({ isDark, onThemeToggle }) {
   });
 
   const equationText = `${storedValue ?? ""} ${operator ?? ""}`.trim();
+  const operatorClassName = (op) =>
+    `key key--operator${operator === op ? " key--selected" : ""}`;
 
   return (
     <section className="calculator" aria-label="Calculator">
@@ -287,8 +289,9 @@ function Calculator({ isDark, onThemeToggle }) {
         </button>
         <button
           type="button"
-          className="key key--operator"
+          className={operatorClassName("/")}
           onClick={() => chooseOperator("/")}
+          aria-pressed={operator === "/"}
         >
           /
         </button>
@@ -304,8 +307,9 @@ function Calculator({ isDark, onThemeToggle }) {
         </button>
         <button
           type="button"
-          className="key key--operator"
+          className={operatorClassName("*")}
           onClick={() => chooseOperator("*")}
+          aria-pressed={operator === "*"}
         >
           *
         </button>
@@ -321,17 +325,14 @@ function Calculator({ isDark, onThemeToggle }) {
         </button>
         <button
           type="button"
-          className="key key--operator"
+          className={operatorClassName("-")}
           onClick={() => chooseOperator("-")}
+          aria-pressed={operator === "-"}
         >
           -
         </button>
 
-        <button
-          type="button"
-          className="key key--wide"
-          onClick={() => inputDigit("0")}
-        >
+        <button type="button" className="key" onClick={() => inputDigit("0")}>
           0
         </button>
         <button type="button" className="key" onClick={inputDecimal}>
@@ -342,8 +343,9 @@ function Calculator({ isDark, onThemeToggle }) {
         </button>
         <button
           type="button"
-          className="key key--operator"
+          className={operatorClassName("+")}
           onClick={() => chooseOperator("+")}
+          aria-pressed={operator === "+"}
         >
           +
         </button>
@@ -356,7 +358,7 @@ function Calculator({ isDark, onThemeToggle }) {
       <footer className="calculator__social" aria-label="Social links">
         <a
           className="social-link"
-          href="https:/github.com/official-ahmad"
+          href={GITHUB_URL}
           target="_blank"
           rel="noreferrer"
           aria-label="GitHub profile"
@@ -370,7 +372,7 @@ function Calculator({ isDark, onThemeToggle }) {
 
         <a
           className="social-link"
-          href="https://www.linkedin.com/in/muhammadahmadali--/"
+          href={LINKEDIN_URL}
           target="_blank"
           rel="noreferrer"
           aria-label="LinkedIn profile"
